@@ -1,0 +1,7 @@
+name="Multistep user registration form"
+description = All user registration form
+core = 7.x
+version=7.x
+package=Humsafar
+project = "Humsafar"
+datestamp = "1487028488"

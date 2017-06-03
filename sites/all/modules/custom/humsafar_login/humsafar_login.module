@@ -1,0 +1,42 @@
+<?php 
+
+/**
+ * 
+ * Implements hook_menu().
+ *
+ */
+
+function humsafar_login_menu(){
+  
+  $items=array();
+
+ $items['hello']= array(
+    'title'=>'Hello menu',
+    'page callback'=>'drupal_get_form',
+    'page arguments'=>array('hello_fun'),
+    'access callback'=>TRUE,
+  );
+  return $items;
+}
+
+function hello_fun($form,&$form_state){
+  $form=array();
+  $form['first_name']=array(
+   '#title'=>t('First Name'),
+   '#type'=>'textfield',
+   '#ajax'=>array(
+     'callback'=>'poll_choice_js',
+     'wrapper'=>'change-div',
+      'effect' => 'fade',
+    ),
+   );
+  $form['#attached']['js']=array(
+    drupal_get_path('module','humsafar_login').'/script/myscript.js',
+  );
+
+  return $form;
+}
+
+function poll_choice_js($form, $form_state){
+
+}

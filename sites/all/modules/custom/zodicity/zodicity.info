@@ -1,0 +1,14 @@
+name=Zodicity
+description=This is custom module for project's business logic.
+
+; Dependencies
+
+; Files
+
+version='7.x'
+core='7.x'
+package=Humsafar
+project = "Humsafar"
+datestamp = "1487028488"
+
+
