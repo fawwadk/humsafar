@@ -39,7 +39,7 @@ function custom_block_block_info(){
 				$block['content']=custom_user_login_block();
 			break; 
 			case 'user_myaccount_block':
-				$block['subject']=t('myaccount');
+				$block['subject']=t('');
 				$block['content']=myaccount_info();
 
 			break;
