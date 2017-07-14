@@ -1,0 +1,19 @@
+   <?php
+  /**
+    *Implementation hook_menu()
+    */
+function my_module_menu(){
+    $items = array();
+
+    $items['myform']=array(
+    'title' => 'My Form',
+    'page callback'=>'drupal_get_form',
+    'page arguments' => array('my_form'),
+    'access callback' => TRUE,
+    'file'=>'my_module_form.inc',
+    'type'=>MENU_NORMAL_ITEM,
+    );
+ return $items;
+ }
+
+

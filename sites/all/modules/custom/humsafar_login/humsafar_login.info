@@ -1,0 +1,11 @@
+name="Humsafar login"
+description='Custom login for humsafar'
+; Dependencies
+
+; Files
+
+version='7.x'
+core='7.x'
+package=Humsafar
+project = "Humsafar"
+datestamp = "1487028488"

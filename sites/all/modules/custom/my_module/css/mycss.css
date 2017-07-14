@@ -1,0 +1,9 @@
+/**
+ * @file
+ * CSS for Field Example.
+ */
+
+#edit-fname {
+  border-color: rgba(255, 255, 255, 0.3);
+  background-color: #cd0a0a;
+}

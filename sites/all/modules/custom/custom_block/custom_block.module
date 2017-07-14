@@ -1,0 +1,134 @@
+<?php 
+
+/**
+ * Implements hook_block_info().
+ */
+
+function custom_block_block_info(){
+  $blocks['user_section']=array(
+   'info'=> t('User section'),
+   'cache' => DRUPAL_NO_CACHE,
+  );
+ 
+  $blocks['user_myaccount_block'] = array(
+    'info' => t('User My Account'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  $blocks['top_members']=array(
+      'info' => t('Top Members'),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  
+  return $blocks;
+}
+
+
+/**
+ *
+ * Implements hook_block_view().
+ *
+ */
+ 
+ function custom_block_block_view($delta = ''){
+	 
+	 $block=array();
+           switch($delta){
+			case 'user_section':
+				$block['subject']=t('Login');
+				$block['content']=custom_user_login_block();
+			break; 
+			case 'user_myaccount_block':
+				$block['subject']=t('myaccount');
+				$block['content']=myaccount_info();
+
+			break;
+			case 'top_members':
+				$block['subject'] = t('Top Members');
+				$block['content'] = top_members_block();
+			break;
+          }  
+        return $block;
+ }
+
+/**
+ *
+ */
+  function custom_user_login_block(){
+     $title='hello world';
+     return theme('custom_block_output',array('title'=>$title));
+     
+  }
+
+  /**
+   * 
+   */
+    function myaccount_info(){
+      global $user;
+      if(user_is_logged_in()){
+           
+        $user_info=user_load($user->uid);
+        $img_path=drupal_get_path('module', 'custom_block').'/images/user_default_icon.png';
+        $user_avtar=theme('user_picture', array('account' =>$user_info));
+        $output="<div id='mblock'>";
+        $output.='<img src='.base_path().$img_path.' />';
+        $output.='</div>';
+        $output.=$user_avtar;
+        $output.="<div class='user-details'>";
+        $output.=l(t('My Account'), 'user',array('attributes' => array('class' => 'user_account')));
+        $output.=l(t('Logout'), 'user/logout',array('attributes' => array('class' => 'user_account')));
+        $output.='</div>';
+        return $output;
+          
+      }else{
+          //l($text, $path, array $options = array())
+          $output="<div id='mblock'>";
+          $output.="<div id='lblock'>";
+          $output.=l(t('Log in'), "/user/login", array('attributes' => array('class' => 'user_account')));
+          $output.='</div>';
+          $output.="<div id='sblock'>";
+	  $output.=l(t('Sign up'), '/user/register',array('attributes' => array('class' => 'user_register')));
+          $output.="</div>";
+          $output.='</div>';
+          return $output;
+      }
+    }
+  
+  
+  /**
+ * Top Members function
+ */
+
+function top_members_block(){
+  
+  //return "Top Member";
+  $title="Top Member";
+  $ref_link=array('path'=>'app-contributor-dash','options'=>array());
+  $output = theme('custom_block_output', array(
+      'title' => $title,
+      'block-class' => 'top-member',
+      'ref_link' => $ref_link,));
+  return $output;
+}
+  
+  
+  /**
+   * 
+   * Implements hook_theme().
+   * 
+   */
+  function custom_block_theme($existing, $type, $theme, $path){
+      //block--[module]
+      return array(
+         'custom_block_output'=>array(
+             'variables'=>array('title' => NULL,),
+             'path' => $path . '/templates',
+             'template'=>'block--custom_block',
+         ) 
+      );
+  }
+  
+  
+  
+  
+  

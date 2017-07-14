@@ -1,0 +1,7 @@
+name="Business logic"
+description = All Business for this particular project
+core = 7.x
+version=7.x
+package=Humsafar
+project = "Humsafar"
+datestamp = "1487028488"

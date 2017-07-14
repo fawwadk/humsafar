@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ */
+
+function zodicity_block_info(){
+ 
+  $blocks['top_members']=array(
+      'info' => t('Top Members'),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['zodicity_footer']=array(
+      'info' => t('Zodicity Footer'),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function zodicity_block_view($delta = ''){
+ 
+  $block=array();
+  switch($delta){
+    case 'top_members':
+      $block['subject'] = t('Top Members');
+      $block['content'] = top_members_block();
+    break;
+    case 'zodicity_footer':
+     $block['subject']=t('zodicity footer');
+     $block['content'] = footer_block();
+    break;
+  }
+return $block;
+}
+
+/**
+ * Top Members function
+ */
+
+function top_members_block(){
+  
+  //return "Top Member";
+  $title="Top Member";
+  $ref_link=array('path'=>'app-contributor-dash','options'=>array());
+  $output = theme('zodicity_block_output', array(
+      'title' => $title,
+      'block-class' => 'top-member',
+      'ref_link' => $ref_link,));
+  return $output;
+}
+
+/**
+ * Footer Content
+ */
+
+function footer_block(){
+  
+   return "Copyright © 2016 zanitechnologies.com";
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function zodicity_theme($existing, $type, $theme, $path) {
+  
+  return array(
+    'zodicity_block_output'=>array(
+        'variables' => array(
+            'title' => NULL,
+            'count' => NULL,
+            'block-class' => NULL,
+       ),
+       'path'=>$path.'/templates',
+       'template' => 'block--zodicity',
+     ),
+  );
+}
