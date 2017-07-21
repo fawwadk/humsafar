@@ -1,0 +1,8 @@
+name = Custom User
+description = Customize the user registration and login system.
+package = Custom
+version = VERSION
+core = 7.x
+stylesheets[all][] = custom_user.css
+
+; Information added by Developer packaging script on 2017-07-21
